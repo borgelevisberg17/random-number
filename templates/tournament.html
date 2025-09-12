@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneio - Arena dos Números</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="display-4 text-warning text-center">{{ '🏆' if mode == '1x1' else '🏅' }} Torneio {{ '1x1' if mode == '1x1' else '2x2' }}</h1>
+        <p class="lead text-light text-center">{{ 'Prove quem é o melhor!' if mode == '1x1' else 'A glória espera!' }}</p>
+        <div class="row mt-4">
+            <div class="col-md-6 mx-auto">
+                <div id="game-area">
+                    <form id="start-form" style="display: block;">
+                        <div class="mb-3">
+                            <label for="difficulty" class="form-label text-light">Dificuldade</label>
+                            <select class="form-select" id="difficulty">
+                                <option value="1">Fácil (1-10)</option>
+                                <option value="2" selected>Médio (1-20)</option>
+                                <option value="3">Difícil (1-50)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rounds" class="form-label text-light">Número de Rodadas (1-5)</label>
+                            <input type="number" class="form-control" id="rounds" min="1" max="5" value="3" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="session_id" class="form-label text-light">ID da Sessão</label>
+                            <input type="text" class="form-control" id="session_id" placeholder="Deixe em branco para criar nova sessão" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="player_name" class="form-label text-light">Seu Nome</label>
+                            <input type="text" class="form-control" id="player_name" required>
+                        </div>
+                        {% if mode == '2x2' %}
+                            <div class="mb-3">
+                                <label for="team1_name" class="form-label text-light">Nome da Equipe 1</label>
+                                <input type="text" class="form-control" id="team1_name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="team1_p1" class="form-label text-light">Jogador 1 da Equipe 1</label>
+                                <input type="text" class="form-control" id="team1_p1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="team1_p2" class="form-label text-light">Jogador 2 da Equipe 1</label>
+                                <input type="text" class="form-control" id="team1_p2" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="team2_name" class="form-label text-light">Nome da Equipe 2</label>
+                                <input type="text" class="form-control" id="team2_name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="team2_p1" class="form-label text-light">Jogador 1 da Equipe 2</label>
+                                <input type="text" class="form-control" id="team2_p1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="team2_p2" class="form-label text-light">Jogador 2 da Equipe 2</label>
+                                <input type="text" class="form-control" id="team2_p2" required>
+                            </div>
+                        {% else %}
+                            <div class="mb-3">
+                                <label for="player1" class="form-label text-light">Jogador 1</label>
+                                <input type="text" class="form-control" id="player1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="player2" class="form-label text-light">Jogador 2</label>
+                                <input type="text" class="form-control" id="player2" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="player3" class="form-label text-light">Jogador 3</label>
+                                <input type="text" class="form-control" id="player3" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="player4" class="form-label text-light">Jogador 4</label>
+                                <input type="text" class="form-control" id="player4" required>
+                            </div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary">Iniciar Torneio</button>
+                    </form>
+                    <div id="game-controls" style="display: none;">
+                        <div class="mb-3">
+                            <label for="guess" class="form-label text-light">Seu Palpite (ou 'dica')</label>
+                            <input type="text" class="form-control" id="guess" placeholder="Digite um número ou 'dica'">
+                        </div>
+                        <button id="submit-guess" class="btn btn-primary">Enviar Palpite</button>
+                        <button id="rematch" class="btn btn-warning" style="display: none;">Revanche</button>
+                    </div>
+                    <div id="game-messages" class="mt-3"></div>
+                    <div id="scores" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+        <a href="/" class="btn btn-secondary mt-3">Voltar ao Menu</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io@4.5.0/dist/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.list-group-item-dark {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+.list-group-item-dark:hover {
+    background-color: #3a3a3a;
+}
+
+.list-group-item.current-player {
+    background-color: #28a745;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.alert-success {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+.alert-danger {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.alert-info {
+    background-color: #17a2b8;
+    color: #ffffff;
+}
+
+.table {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+.table th, .table td {
+    border: 1px solid #444;
+}
+
+#game-messages, #wifi-messages, #ranking-table, #scores, #online-status {
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #2c2c2c;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+#ranking-chart, #training-chart {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#tournament-bracket {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #2c2c2c;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+.bracket-match {
+    border-bottom: 1px solid #444;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.bracket-match:last-child {
+    border-bottom: none;
+}
+
+.bracket-player {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
