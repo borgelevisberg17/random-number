@@ -13,8 +13,6 @@ def init_db():
                  (player TEXT PRIMARY KEY)''')
     c.execute('''CREATE TABLE IF NOT EXISTS online_sessions
                  (player TEXT, session_id TEXT, mode TEXT, date TEXT)''')
-    c.execute('''CREATE TABLE IF NOT EXISTS game_states
-                 (session_id TEXT PRIMARY KEY, game_state TEXT)''')
     conn.commit()
     conn.close()
 
@@ -130,28 +128,5 @@ def save_online_session(player, session_id, mode):
     c = conn.cursor()
     c.execute("INSERT OR REPLACE INTO online_sessions (player, session_id, mode, date) VALUES (?, ?, ?, ?)",
               (player, session_id, mode, datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-    conn.commit()
-    conn.close()
-
-def save_game_state(session_id, game_state):
-    conn = sqlite3.connect('arena.db')
-    c = conn.cursor()
-    c.execute("INSERT OR REPLACE INTO game_states (session_id, game_state) VALUES (?, ?)",
-              (session_id, json.dumps(game_state)))
-    conn.commit()
-    conn.close()
-
-def load_game_state(session_id):
-    conn = sqlite3.connect('arena.db')
-    c = conn.cursor()
-    c.execute("SELECT game_state FROM game_states WHERE session_id = ?", (session_id,))
-    result = c.fetchone()
-    conn.close()
-    return json.loads(result[0]) if result else None
-
-def delete_game_state(session_id):
-    conn = sqlite3.connect('arena.db')
-    c = conn.cursor()
-    c.execute("DELETE FROM game_states WHERE session_id = ?", (session_id,))
     conn.commit()
     conn.close()
