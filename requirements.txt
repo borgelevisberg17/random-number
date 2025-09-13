@@ -1,0 +1,6 @@
+Flask
+Flask-SocketIO
+rich
+cryptography
+python-socketio[client]
+gunicorn
